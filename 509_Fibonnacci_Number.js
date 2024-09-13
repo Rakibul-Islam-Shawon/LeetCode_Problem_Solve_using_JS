@@ -15,3 +15,4 @@ var fib = function(n) {
 }
 
 console.log(fib(1));
+console.log(fib(7));
