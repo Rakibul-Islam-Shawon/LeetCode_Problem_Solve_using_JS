@@ -1,22 +1,25 @@
-var isAnagram = function(s, t) {
+// 
 
-    if (s.length !== t.length) return false;
-    return s.split('').sort().join('') === t.split('').sort().join('');
-    // var count = 0;
-    // for(let i=0;i<s.length;i++){
-    //     for(let j = 0; j<s.length; j++){
-    //         if(s[i]==t[j]){
-    //             count++;
-    //         }
-    //     }
-        
-    // }
-    // if((count) == s.length){
-    //     return true;
-    // }
-    // else{
-    //     return false
-    // }
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false; // If lengths differ, not an anagram
+
+    let countMap = {};
+
+    // Count characters in `s`
+    for (let char of s) {
+        countMap[char] = (countMap[char] || 0) + 1;
+    }
+
+    // Subtract counts based on `t`
+    for (let char of t) {
+        if (!countMap[char]) {
+            return false; // Character in `t` is not in `s` or is extra
+        }
+        countMap[char]--;
+    }
+
+    return true; // If all counts match, it's an anagram
 };
 
-console.log(isAnagram("anagram","nagaram"));
+console.log(isAnagram("anagram", "nagaram")); // true
+console.log(isAnagram("rat", "car")); // false
